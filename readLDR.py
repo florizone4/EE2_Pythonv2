@@ -4,19 +4,17 @@ from gpiozero import LightSensor
 
 
 def get_lightValue():
+    adc = MCP3008(channel=3)
     sensor = LightSensor(3)
     theValue = sensor.value
     return theValue
 
-def converter(gen):
-    for value in gen:
-        yield ((1-value) * 100)
+# def converter(gen):
+#     for value in gen:
+#         yield ((1-value) * 100)
 
-adc = MCP3008(channel=3)
+
 #SMS = MCP3008(channel=0, clock_pin=17, mosi_pin=18, miso_pin=27)
 
-for data in converter(adc.values):
-    print('Soil moisture: ', data, '%')
-    sleep(1)
 
 #LDR = MCP3008(channel=3, clock_pin=17, mosi_pin=18, miso_pin=27)

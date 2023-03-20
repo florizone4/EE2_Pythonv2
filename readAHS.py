@@ -3,19 +3,13 @@ from time import sleep
 
 
 def read_AHSValue():
-
+    adc = MCP3008(channel=1)
     humidity_voltage = adc.value * 3.3
     humidity_percentage = (humidity_voltage / 3.3) * 100
     return humidity_percentage
 
 
-def converter(gen):
-    for value in gen:
-        yield ((1-value) * 100)
 
-adc = MCP3008(channel=0)
+
 #SMS = MCP3008(channel=0, clock_pin=17, mosi_pin=18, miso_pin=27)
 
-for data in converter(adc.values):
-    print('Soil moisture: ', data, '%')
-    sleep(1)
