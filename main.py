@@ -1,6 +1,5 @@
 import readSMS
 import readAHS
-import readDB
 import readLDR
 import readNTC
 import setFan
@@ -18,6 +17,7 @@ minHum = 20
 maxMois = 30
 minMois = 10
 maxTemp = 20
+
 
 
 #NOTE THE SET FUNCTIONS CAN STILL BE BROKEN!!!
