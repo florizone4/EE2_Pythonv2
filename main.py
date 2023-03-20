@@ -6,16 +6,22 @@ import readNTC
 import setFan
 import setLED
 import setPump
-
-from gpiozero import
+import time
 import connectDB
-
+import ReadManualOutputs
 
 
 while True:
 
     #read the outputs DataBase
+    data = ReadManualOutputs.read_last_row_from_database()
+    #manual mode
+    if (len(data) != 0): #the array is only filled when manual mode is on
+        setPump = data[1]
+        Led = data[2]
+        setFan = data[3]
 
+    #AUTOMATIC mode
     # do some enable/disable logic
     # enable/ disable the pump, led, fan
     if(LDRValue > maxLight):
@@ -42,6 +48,8 @@ while True:
     NTC = readNTC.read_NTC() #change formula!
     # upload sensor data to the measurements database
     connectDB.pushtoDB(LDRValue, AHSValue, SMSValue, NTC)
+
+    time.sleep(10)
 
 
 
