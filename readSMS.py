@@ -1,6 +1,13 @@
 from gpiozero import MCP3008
 from time import sleep
 
+
+def read_SMSValue():
+
+    SMS_voltage = adc.value * 3.3
+    SMS_percentage = (SMS_voltage / 3.3) * 100
+    return SMS_percentage
+
 def converter(gen):
     for value in gen:
         yield ((1-value) * 100)

@@ -1,5 +1,12 @@
 from gpiozero import MCP3008
 from time import sleep
+from gpiozero import LightSensor
+
+
+def get_lightValue():
+    sensor = LightSensor(3)
+    theValue = sensor.value
+    return theValue
 
 def converter(gen):
     for value in gen:

@@ -1,6 +1,14 @@
 from gpiozero import MCP3008
 from time import sleep
 
+
+def read_AHSValue():
+
+    humidity_voltage = adc.value * 3.3
+    humidity_percentage = (humidity_voltage / 3.3) * 100
+    return humidity_percentage
+
+
 def converter(gen):
     for value in gen:
         yield ((1-value) * 100)

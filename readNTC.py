@@ -1,6 +1,14 @@
 from gpiozero import MCP3008
 from time import sleep
 
+
+def read_NTC():
+    NTC_percentage = (NTC_voltage / 3.3) * 100 #rewrite this to a better code to convert voltage to TEMP
+    return NTC_percentage
+
+
+
+
 def converter(gen):
     for value in gen:
         yield (1 * 100)
