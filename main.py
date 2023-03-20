@@ -10,9 +10,29 @@ import time
 import connectDB
 import ReadManualOutputs
 
+#SETTINGS
+maxLight = 50
+minLight = 20
+maxHum = 50
+minHum = 20
+maxMois = 30
+minMois = 10
+maxTemp = 20
+
+
 #NOTE THE SET FUNCTIONS CAN STILL BE BROKEN!!!
 
 while True:
+
+
+    # read sensors
+    LDRValue = readLDR.get_lightValue() #finished
+    AHSValue = readAHS.read_AHSValue() #finished
+    SMSValue = readSMS.read_SMSValue() #finished
+    NTC = readNTC.read_NTC() #change formula!
+    # upload sensor data to the measurements database
+    connectDB.pushtoDB(LDRValue, AHSValue, SMSValue, NTC)
+
 
     #read the outputs DataBase
     data = ReadManualOutputs.read_last_row_from_database()
@@ -33,22 +53,16 @@ while True:
         setPump.setpumpert(0.9)
     elif(AHSValue < minHum):
         setPump.setpumpert(0)
-    if(SMSSValue > maxMois):
+    if(SMSValue > maxMois):
         setPump.setpumpert(0.9)
-    elif(SMSSValue < minMois):
+    elif(SMSValue < minMois):
         setPump.setpumpert(0)
     if(NTC > maxTemp):
         setFan.setpumpert(1)
     else:
         setFan.setpumpert(0)
 
-    # read sensors
-    LDRValue = readLDR.get_lightValue() #finished
-    AHSValue = readAHS.read_AHSValue() #finished
-    SMSValue = readSMS.read_SMSValue() #finished
-    NTC = readNTC.read_NTC() #change formula!
-    # upload sensor data to the measurements database
-    connectDB.pushtoDB(LDRValue, AHSValue, SMSValue, NTC)
+
 
     time.sleep(10)
 
