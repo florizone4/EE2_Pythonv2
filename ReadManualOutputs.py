@@ -2,6 +2,7 @@ import mysql.connector
 
 def read_last_row_from_database():
     # Connect to the database
+    #if no connection to the database is possible, automatic mode will continue with the except part
     try:
         cnx = mysql.connector.connect(
             host="mysql.studev.groept.be",
