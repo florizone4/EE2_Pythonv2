@@ -2,40 +2,41 @@ import datetime
 import random
 import time
 import readSMS
-
 import mysql.connector
+def pushtoDB(LDR, AHS, SMS, NTC):
 
-database = mysql.connector.connect(
-    host="mysql.studev.groept.be",
-    user="a22ib2a03",
-    password="secret",
-    database="a22ib2a03"
-)
 
-mycursor = database.cursor(buffered=True)
+    database = mysql.connector.connect(
+        host="mysql.studev.groept.be",
+        user="a22ib2a03",
+        password="secret",
+        database="a22ib2a03"
+    )
 
-ntcArray = []
+    mycursor = database.cursor(buffered=True)
 
-readSMS()
+# ntcArray = []
+
+# readSMS()
 
 while True:
-    temperatureVal = random.uniform(20, 30)
-    humidityVal = random.randon()
-    moistVal = random.randon()
-    lightVal = random.random()
-    getId = "SELECT COUNT(ID) FROM measurements"
-    #print(rows)
-    mycursor.execute(getId)
-    newRowId = int(mycursor.fetchall()[0][0]) + 1
+    # temperatureVal = random.uniform(20, 30)
+    # humidityVal = random.randon()
+    # moistVal = random.randon()
+    # lightVal = random.random()
+    # getId = "SELECT COUNT(ID) FROM measurements"
+    # print(rows)
+    # mycursor.execute(getId)
+    # newRowId = int(mycursor.fetchall()[0][0]) + 1
 
-    print(newRowId)
+    # print(newRowId)
     currentDate = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     currentDateDate = datetime.datetime.strptime(currentDate, "%Y-%m-%d %H:%M:%S")
     print(currentDateDate)
 
-    ntcArray.append(temperatureVal)
-    print("temperature registered: [" + str(temperatureVal) + "]")
-    time.sleep(5)
+    # ntcArray.append(temperatureVal)
+    # print("temperature registered: [" + str(temperatureVal) + "]")
+    # time.sleep(5)
 
     # insert = "INSERT INTO a22ib2a03.measurements (ID,temperature, time) VALUES (('%s', '%s','%s'),(" + str(newRowId) +","+ str(temperatureVal) +" , " + str(currentDateDate) +"))"  # str(currentDate)
     insert = "INSERT INTO a22ib2a03.measurements (temperature, humidity, moisture,light, time) VALUES ( " + str(temperatureVal) +", "+ str(humidityVal) +", " + str(moistVal) +"," + str(lightVal) + " , CURRENT_TIMESTAMP)"
