@@ -3,7 +3,8 @@ import readAHS
 import readDB
 import readLDR
 import readNTC
-from gpiozero import
+import connectDB
+
 
 
 while True:
@@ -19,7 +20,9 @@ while True:
     AHSValue = readAHS.read_AHSValue() #finished
     SMSValue = readSMS.read_SMSValue() #finished
     NTC = readNTC.read_NTC() #change formula!
-    # upload sensor data
+    # upload sensor data to the the measurements database
+    connectDB.pushtoDB(LDRValue, AHSValue, SMSValue, NTC)
+
 
 
 
