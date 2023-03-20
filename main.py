@@ -10,6 +10,7 @@ import time
 import connectDB
 import ReadManualOutputs
 
+#NOTE THE SET FUNCTIONS CAN STILL BE BROKEN!!!
 
 while True:
 

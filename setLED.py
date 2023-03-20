@@ -5,7 +5,7 @@ from time import sleep
 # GPIO 5 : Pump
 # GPIO 6 : Fan
 # GPIO12 : LED
-
+#PWLED Instead of motor
 led = GPIO.PWMLED(12)
 
 def setpumpert(speed):
