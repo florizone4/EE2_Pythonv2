@@ -14,11 +14,12 @@ def read_last_row_from_database():
         cursor = cnx.cursor()
 
         # Execute the SELECT statement to retrieve the last row from the table
-        query = "SELECT id, pump, led, fan, boolean FROM manualOutputsControl ORDER BY id DESC LIMIT 1"
+        query = "SELECT ID, ManualPump, ManualLed, ManualFan, IsPumpManual, IsLedManual, IsFanManual FROM manualOutputsControl ORDER BY ID DESC LIMIT 1"
         cursor.execute(query)
 
         # Fetch the data from the cursor object
         data = cursor.fetchone()
+        print(data)
 
         # Close the cursor and database connections
         cursor.close()
@@ -29,7 +30,9 @@ def read_last_row_from_database():
 
             return data
         else:
+
             return []
 
     except:
+        print("connection not made")
         return []
