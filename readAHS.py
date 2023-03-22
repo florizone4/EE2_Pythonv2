@@ -1,6 +1,8 @@
 from gpiozero import MCP3008
 from time import sleep
 
+# In table "measurements", this is "humidity"
+
 #FIXED
 def read_AHSValue():
     adc = MCP3008(channel=1)

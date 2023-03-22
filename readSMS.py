@@ -1,6 +1,7 @@
 from gpiozero import MCP3008
 from time import sleep
 
+# In table "measurements", this is "moisture"
 
 def read_SMSValue():
     adc = MCP3008(channel=0)

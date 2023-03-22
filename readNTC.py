@@ -1,24 +1,29 @@
 from gpiozero import MCP3008
 from time import sleep
 import math
-impor
 
-
-
+# In table "measurements", this is "temperature"
 
 def read_NTC():
     adc = MCP3008(channel=2)
-    resistance = ((3,3 / adc ) * 2200) - 2200
+    #print(adc.value*3.3)
+    resistance = ((3.3 / (adc.value*3.3)) * 2200) - 2200
+    #print(resistance)
+    A= 3.354016*10**(-3)
+    B= 2.569850*10**(-4)
+    C= 2.620131*10**(-6)
+    D= 6.383091*10**(-8)
 
-    A= -14,6337
-    B= 4791,842
-    C= -115334
-    D= -3,730535 * 1000000
-    Stijnhartje = 1 / (A * math.log(resistance) + B * (math.log(resistance) * math.log(resistance)) + C (math.log(resistance) * math.log(resistance) * math.log(resistance)))  #rewrite this to a better code to convert voltage to TEMP
+    logValue = math.log(resistance/2200)
+
+
+    #Stijnhartje = 1 / (A * math.log(resistance) + B * (math.log(resistance) * math.log(resistance)) + C (math.log(resistance) * math.log(resistance) * math.log(resistance)))  #rewrite this to a better code to convert voltage to TEMP
+    Stijnhartje = (1 / (A+B*logValue+C*(logValue**2)+D*(logValue**3)))-273.15
+    #print(Stijnhartje)
     return Stijnhartje
 
 
-
+#read_NTC()
 
 
 

@@ -2,6 +2,7 @@ from gpiozero import MCP3008
 from time import sleep
 from gpiozero import LightSensor
 
+# In table "measurements", this is "light"
 
 def get_lightValue():
     adc = MCP3008(channel=3)
