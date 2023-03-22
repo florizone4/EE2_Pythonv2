@@ -7,7 +7,7 @@ import math
 def read_NTC():
     adc = MCP3008(channel=2)
     #print(adc.value*3.3)
-    resistance = ((3.3 / (adc.value*3.3)) * 2200) - 2200
+    resistance = ((2200 / (adc.value))) - 2200 #((3.3 / (adc.value*3.3)) * 2200) - 2200
     #print(resistance)
     A= 3.354016*10**(-3)
     B= 2.569850*10**(-4)

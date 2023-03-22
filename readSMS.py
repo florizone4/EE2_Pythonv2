@@ -5,8 +5,8 @@ from time import sleep
 
 def read_SMSValue():
     adc = MCP3008(channel=0)
-    SMS_voltage = adc.value * 3.3
-    SMS_percentage = (SMS_voltage / 3.3) * 100
+    SMS_voltage = 1-adc.value #* 3.3
+    SMS_percentage = (SMS_voltage)*100 #/ 3.3) * 100
     return SMS_percentage
 
 #def converter(gen):

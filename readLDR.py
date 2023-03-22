@@ -6,9 +6,8 @@ from gpiozero import LightSensor
 
 def get_lightValue():
     adc = MCP3008(channel=3)
-    sensor = LightSensor(3)
-    theValue = sensor.value
-    return theValue
+    lightIntensity = adc.value * 100
+    return lightIntensity
 
 # def converter(gen):
 #     for value in gen:

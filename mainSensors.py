@@ -29,9 +29,10 @@ while True:
     LDRValue = readLDR.get_lightValue() #finished
     AHSValue = readAHS.read_AHSValue() #finished
     SMSValue = readSMS.read_SMSValue() #finished
-    NTC = readNTC.read_NTC() #change formula!
+    NTCValue = readNTC.read_NTC() #change formula!
     # upload sensor data to the measurements database
-    connectDB.pushtoDB(LDRValue, AHSValue, SMSValue, NTC)
+    print("NTC: " + str(NTCValue) + ", AHS: " + str(AHSValue) + "SMS: " + str(SMSValue) + ", LDR: " + str(LDRValue))
+    #connectDB.pushtoDB(LDRValue, AHSValue, SMSValue, NTCValue)
 
     time.sleep(10)
 
