@@ -36,31 +36,63 @@ while True:
 
     #read the outputs DataBase
     data = ReadManualOutputs.read_last_row_from_database()
-    #manual mode
-    if (len(data) != 0): #the array is only filled when manual mode is on
-        setPump = data[1]
-        Led = data[2]
-        setFan = data[3]
+    #the logic
+    if (len(data) != 0): #the array is only filled when a successful connection is made to the ReadOutputs Database
+        #If PumpManualMode is ON, set setPump to the manual value
+        #manual
+        if(data[4] == 1):
+            setPump = data[1]
+        #automatic
+        else:
+            if(LDRValue > maxLight):
+                setLED.setpumpert(0)
+            elif(LDRValue < minLight):
+                setLED.setpumpert(1)
 
-    #AUTOMATIC mode
-    # do some enable/disable logic
-    # enable/ disable the pump, led, fan
-    if(LDRValue > maxLight):
-        setLED.setpumpert(0)
-    elif(LDRValue < minLight):
-        setLED.setpumpert(1)
-    if(AHSValue > maxHum):
-        setPump.setpumpert(0.9)
-    elif(AHSValue < minHum):
-        setPump.setpumpert(0)
-    if(SMSValue > maxMois):
-        setPump.setpumpert(0.9)
-    elif(SMSValue < minMois):
-        setPump.setpumpert(0)
-    if(NTC > maxTemp):
-        setFan.setpumpert(1)
+        #the same for Led
+        #manual
+        if(data[5] == 1):
+            Led = data[2]
+        #automatic
+        else:
+            if(AHSValue > maxHum):
+                setPump.setpumpert(0.9)
+            elif(AHSValue < minHum):
+                setPump.setpumpert(0)
+
+        #also the same for Fan
+        #manual
+        if(data[6]== 1):
+            setFan = data[3]
+        #automatic
+        else:
+            if(SMSValue > maxMois):
+                setPump.setpumpert(0.9)
+            elif(SMSValue < minMois):
+                setPump.setpumpert(0)
+
+
+
     else:
-        setFan.setpumpert(0)
+        #AUTOMATIC mode
+        # do some enable/disable logic
+        # enable/ disable the pump, led, fan
+        if(LDRValue > maxLight):
+            setLED.setpumpert(0)
+        elif(LDRValue < minLight):
+            setLED.setpumpert(1)
+        if(AHSValue > maxHum):
+            setPump.setpumpert(0.9)
+        elif(AHSValue < minHum):
+            setPump.setpumpert(0)
+        if(SMSValue > maxMois):
+            setPump.setpumpert(0.9)
+        elif(SMSValue < minMois):
+            setPump.setpumpert(0)
+        if(NTC > maxTemp):
+            setFan.setpumpert(1)
+        else:
+            setFan.setpumpert(0)
 
 
 
