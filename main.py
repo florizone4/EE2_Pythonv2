@@ -8,6 +8,7 @@ import setPump
 import time
 import connectDB
 import ReadManualOutputs
+import ReadAutomaticOutputs
 
 #SETTINGS
 maxLight = 50
@@ -38,7 +39,7 @@ while True:
 
     #read the outputs DataBase
     data = ReadManualOutputs.read_last_row_from_database()
-    print(data)
+    autoTable = ReadAutomaticOutputs.readTable()
     #the logic
     if (len(data) != 0): #the array is only filled when a successful connection is made to the ReadOutputs Database
         #If PumpManualMode is ON, set setPump to the manual value
@@ -47,10 +48,11 @@ while True:
             setPump = data[1]
         #automatic
         else:
-            if(LDRValue > maxLight):
-                setLED.setpumpert(0)
-            elif(LDRValue < minLight):
-                setLED.setpumpert(1)
+            if(AHSValue > autoTable['LowerMois']):
+                setPump.setpumpert(0.9)
+            elif(AHSValue < autoTable['UpperMois']):
+                setPump.setpumpert(0)
+
 
         #the same for Led
         #manual
@@ -58,10 +60,10 @@ while True:
             Led = data[2]
         #automatic
         else:
-            if(AHSValue > maxHum):
-                setPump.setpumpert(0.9)
-            elif(AHSValue < minHum):
-                setPump.setpumpert(0)
+            if(LDRValue > autoTable['LowerLight']):
+                setLED.setpumpert(0)
+            elif(LDRValue < autoTable['UpperLight']):
+                setLED.setpumpert(1)
 
         #also the same for Fan
         #manual
@@ -69,10 +71,10 @@ while True:
             setFan = data[3]
         #automatic
         else:
-            if(SMSValue > maxMois):
-                setPump.setpumpert(0.9)
-            elif(SMSValue < minMois):
-                setPump.setpumpert(0)
+            if(SMSValue > autoTable('UpperTemp')):
+                setFan.setpumpert(0.9)
+            elif(SMSValue < autoTable('LowerTemp')):
+                setFan.setpumpert(0)
 
 
 
