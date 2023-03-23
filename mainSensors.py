@@ -2,12 +2,12 @@ import readSMS
 import readAHS
 import readLDR
 import readNTC
-import setFan
-import setLED
-import setPump
+# import setFan
+# import setLED
+# import setPump
 import time
-import connectDB
-import ReadManualOutputs
+# import connectDB
+# import ReadManualOutputs
 
 #SETTINGS
 maxLight = 50
