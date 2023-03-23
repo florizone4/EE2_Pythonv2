@@ -1,10 +1,16 @@
-import gpiozero as GPIO
+from gpiozero import Motor
 from time import sleep
+import gpiozero.pins.rpigpio
 
-pwmValue = 0.9
+def close(self): pass
+gpiozero.pins.rpigpio.RPiGPIOPin.close = close
 
-motor = GPIO.Motor(5, 4)
+gpiozero.LED(..., pin_factory=gpiozero.pins.rpigpio.RPiGPIOFactory())
 
+#motor = GPIO.Motor(5, 4)
+#motor = GPIO.PWMOutputDevice(5)
+motor = Motor(5,7)
+print("Motor running")
 def setpumpert(speed):
     n = 0.15
     #sleep(1)
@@ -14,9 +20,11 @@ def setpumpert(speed):
          n = n + 0.01
          print(n)
          sleep(0.025)
-    while True:
-    	 motor.forward(n - 0.01)
+    #while True:
+    motor.forward(n)
 
-setpumpert(pwmValue)
+#	 motor.forward(n - 0.01)
+
+setpumpert(0.9)
 #while True:
     #motor.forward(pwmValue)

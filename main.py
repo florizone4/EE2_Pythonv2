@@ -38,13 +38,15 @@ while True:
 
     #read the outputs DataBase
     data = ReadManualOutputs.read_last_row_from_database()
+    #   0,          1,         2,         3,           4,            5,           6
+    #  ID, autoPumpManualPump, ManualLed, ManualFan, IsPumpManual, IsLedManual, IsFanManual
     print(data)
     #the logic
     if (len(data) != 0): #the array is only filled when a successful connection is made to the ReadOutputs Database
         #If PumpManualMode is ON, set setPump to the manual value
         #manual
         if(data[4] == 1):
-            setPump = data[1]
+            setPump.setpumpert(data[1])
         #automatic
         else:
             if(LDRValue > maxLight):
