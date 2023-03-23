@@ -48,9 +48,9 @@ while True:
             setPump = data[1]
         #automatic
         else:
-            if(AHSValue > autoTable['LowerMois']):
+            if(AHSValue > autoTable[1]["MaxValue"]):
                 setPump.setpumpert(0.9)
-            elif(AHSValue < autoTable['UpperMois']):
+            elif(AHSValue < autoTable[1]["MinValue"]):
                 setPump.setpumpert(0)
 
 
@@ -60,9 +60,9 @@ while True:
             Led = data[2]
         #automatic
         else:
-            if(LDRValue > autoTable['LowerLight']):
+            if(LDRValue > autoTable[3]["MaxValue"]):
                 setLED.setpumpert(0)
-            elif(LDRValue < autoTable['UpperLight']):
+            elif(LDRValue < autoTable[3]["MinValue"]):
                 setLED.setpumpert(1)
 
         #also the same for Fan
@@ -71,9 +71,9 @@ while True:
             setFan = data[3]
         #automatic
         else:
-            if(SMSValue > autoTable('UpperTemp')):
+            if(SMSValue > autoTable[1]["MaxValue"]):
                 setFan.setpumpert(0.9)
-            elif(SMSValue < autoTable('LowerTemp')):
+            elif(SMSValue < autoTable[1]["MinValue"]):
                 setFan.setpumpert(0)
 
 
