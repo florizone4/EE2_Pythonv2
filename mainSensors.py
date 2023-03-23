@@ -2,12 +2,12 @@ import readSMS
 import readAHS
 import readLDR
 import readNTC
-import setFan
-import setLED
-import setPump
+# import setFan
+# import setLED
+# import setPump
 import time
-import connectDB
-import ReadManualOutputs
+# import connectDB
+# import ReadManualOutputs
 
 #SETTINGS
 maxLight = 50
@@ -34,7 +34,7 @@ while True:
     print("NTC: " + str(NTCValue) + ", AHS: " + str(AHSValue) + "SMS: " + str(SMSValue) + ", LDR: " + str(LDRValue))
     #connectDB.pushtoDB(LDRValue, AHSValue, SMSValue, NTCValue)
 
-    time.sleep(10)
+    time.sleep(1)
 
 
 
