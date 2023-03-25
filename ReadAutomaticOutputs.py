@@ -5,7 +5,7 @@ import json
 def readTable():
     # Connect to the database
     # if no connection to the database is possible, automatic mode will continue with the except part
-    #try:
+    try:
         import requests
         response = requests.get("https://studev.groept.be/api/a22ib2a03/returnAutoControls")
         print("Response: ", response)
@@ -17,10 +17,11 @@ def readTable():
         return parsed
 
 
-    #except:
+    except:
+
+        print("conenction to automatic DBnot made")
         return []
 
 
-while True:
-    readTable()
+
 
