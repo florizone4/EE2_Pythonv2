@@ -23,10 +23,12 @@ def pushtoDB(LDR, AHS, SMS, NTC):
     # humidityVal = random.randon()
     # moistVal = random.randon()
     # lightVal = random.random()
-    # getId = "SELECT COUNT(ID) FROM measurements"
+    # getId = "SELECT MAX(ID) FROM measurements"
     # print(rows)
     # mycursor.execute(getId)
-    # newRowId = int(mycursor.fetchall()[0][0]) + 1
+    # newRowId = int(mycursor.fetchone()[0][0]) + 1
+    # print(newRowId)
+
 
     # print(newRowId)
     # currentDate = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

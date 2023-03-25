@@ -1,3 +1,5 @@
+from gpiozero import Motor
+from RPi.GPIO import PWM
 import gpiozero as GPIO
 from time import sleep
 import gpiozero.pins.rpigpio
@@ -18,7 +20,7 @@ def setpumpert(speed):
     while(n < speed):
          motor.forward(n)
          n = n + 0.01
-         print(n)
+         #print(n)
          sleep(0.025)
     #while True:
     motor.forward(n - 0.1)

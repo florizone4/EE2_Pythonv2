@@ -9,10 +9,4 @@ from time import sleep
 led = GPIO.PWMLED(12)
 
 def setpumpert(speed):
-    led.value(speed)
-
-
-n = 0
-while True:
-
-    setpumpert(1)
+    led.value = speed

@@ -6,12 +6,7 @@ from time import sleep
 # GPIO 6 : Fan
 # GPIO12 : LED
 
-motor = GPIO.Motor(6, 4)
+fan = GPIO.PWMLED(6)
 
 def setpumpert(speed):
-    motor.forward(speed)
-
-n = 0
-while True:
-
-    setpumpert(1)
+    fan.value = speed

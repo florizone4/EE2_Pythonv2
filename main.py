@@ -3,8 +3,7 @@ import readAHS
 import readLDR
 import readNTC
 import setFan
-#import setFan
-#import setLED
+import setLED
 import setPump
 import time
 import connectDB
@@ -24,16 +23,18 @@ while True:
     NTCValue = readNTC.read_NTC()               #finished
     # upload sensor data to the measurements database
     print("NTC: " + str(NTCValue) + ", AHS: " + str(AHSValue) + "SMS: " + str(SMSValue) + ", LDR: " + str(LDRValue))
+    connectDB.pushtoDB(LDRValue, AHSValue, SMSValue, NTCValue)
 
     #UNCOMMENT THIS!!
     #connectDB.pushtoDB(LDRValue, AHSValue, SMSValue, NTC)
 
 
     #read the outputs DataBase
+    print("Here")
     data = ReadManualOutputs.read_last_row_from_database()
     #   0,          1,         2,         3,           4,            5,           6
     #  ID, autoPumpManualPump, ManualLed, ManualFan, IsPumpManual, IsLedManual, IsFanManual
-    print("data " , data)
+    print("data " , data[0])
     #the logic
     #the array is only filled when a successful connection is made to the ReadOutputs Database
         #If PumpManualMode is ON, set setPump to the manual value
@@ -49,17 +50,17 @@ while True:
         #         setLED.setpumpert(1)
     #FAN
     if(data[9] == 1):
-        setPump.setpumpert(data[6]/100)
+        setFan.setpumpert(data[6]/100)
         print("manual " , data[6]/100)
     else:
-        setPump.setpumpert(data[3])
+        setFan.setpumpert(data[3])
         print("automatic " , data[3])
 
     #LED
     if (data[8]== 1):
-        setFan.setpumpert(data[5]/100)
+        setLED.setpumpert(data[5]/100)
     else:
-        setFan.setpumpert(data[2]/100)
+        setLED.setpumpert(data[2])
 
     #PUMP
     if(data[7] == 1):
@@ -124,7 +125,7 @@ while True:
 
 
 
-    time.sleep(10)
+    time.sleep(2)
 
 
 
